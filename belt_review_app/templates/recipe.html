@@ -1,0 +1,44 @@
+{%extends 'layout.html' %}
+{%block body%}
+<div class="container col-6">
+    <div class="d-flex justify-content-between m-3">
+        <h3>welcome {{ user.full_name() }}</h3>
+        <a href="/recipe/new" class="btn btn-outline-info">+ create</a>
+        <a href="/logout" class="btn btn-outline-danger">Log out</a>
+    </div>
+    <hr>
+    <div>
+        <h4>All Posted recipe</h4>
+        <table class="table table-secondary table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Under</th>
+                    <th>Posted By</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for recipe in recipes: %}
+                <tr>
+                    <td>{{recipe.name}}</td>
+                    <td>{%if recipe.under_30_minutes:%}
+                        Yes
+                        {%else%}
+                        No
+                        {%endif%}
+                    </td>
+                    <td>{{recipe.user.first_name}}</td>
+                    <td><a href="/recipe/{{recipe.id}}">Show</a>{%if user.id == recipe.user.id%} |<a href="/recipe/edit/{{recipe.id}}">Edit</a>| <a href="/recipe/delete/{{recipe.id}}">Delete</a>{%endif%}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+    
+        
+
+    </table>
+
+</div>
+{%endblock%}

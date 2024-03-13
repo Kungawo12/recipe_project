@@ -1,0 +1,50 @@
+{%extends "layout.html"%}
+{%block body%}
+<div class="container bg-secondary ">
+    <div class="d-flex justify-content-between m-3 p-3">
+        <h3>Edit Recipe </h3>
+        <div class="div">
+            <a href="/recipe" class="btn btn-outline-info me-3">back to recipes</a>
+            <a href="/logout" class="btn btn-outline-danger">Log out</a>
+        </div>
+    </div>
+    <form action="/update/recipe" method="post">
+        <input type="hidden" name="recipe_id" value="{{ recipe.id }}">
+    <div class="d-flex justify-content-between m-3 p-3">
+        <div class="row">
+            <input type="hidden" name="user_id" value="{{user.id}}">
+            <div class="form-group m-3">
+                <label for="name" class="mb-2">Name</label>
+                <input type="text" class="form-control" name="name" id="name">
+            </div>
+            <div class="form-group m-3">
+                <label for="description" class="mb-2">Description:</label>
+                <textarea name="description" id="description"class="form-control" cols="20" rows="5"></textarea>
+            </div>
+            <div class="form-group m-3">
+                <label for="instructions" class="mb-2">Instructions:</label>
+                <textarea name="instructions" id="instructions" class="form-control" cols="20" rows="5"></textarea>
+            </div>
+        </div>
+        <div class="row m-3 p-2">
+            <div class="form-group mt-5 pt-4">
+                <label for="date_cooked" class="mb-2">Date Cooked</label>
+                <input class="form-control" id="date_cooked" name="date_cooked" type="date" required>
+            </div>
+            <div class="form-group mb-4 pb-5">
+                <p>Under 30 minutes?</p>
+                <label for="yes" class="form-label">Yes</label>
+                <input type="radio" name="under_30_minutes" value="Yes"> 
+                <label for="no" class="form-label">No</label>
+                <input type="radio" name="under_30_minutes" value="No" > 
+            </div>
+            <div class="form-group">
+                <button type="submit" class=" btn btn-outline-primary mb-4">Submit</button>
+            </div>
+        </div>
+        </div>
+        
+    </form>
+    </div>
+</div>
+{%endblock%}

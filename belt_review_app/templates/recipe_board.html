@@ -1,0 +1,43 @@
+{%extends "layout.html"%}
+{%block body%}
+<div class="container col-6 bg-secondary">
+    <div class="d-flex justify-content-evenly m-3 p-3">
+        <h3>WELCOME {{user.full_name()}} </h3>
+        <div>
+            <a href="/recipe" class="btn btn-outline-info me-3">back to recipes</a>
+            <a href="/logout" class="btn btn-outline-danger">Log out</a>
+        </div>
+    </div>
+    <div class="d-flex justify-content-around">
+        <h4>{{recipe.name}}</h4>
+        <p> Posted By: {{recipe.user.first_name}}</p>
+    </div>
+    <div class="card bg-light m-4 p-3 border border-dark height:75%">
+        <div class="d-flex justify-content-between">
+            <p>Descriptions:</p>
+            <p class="text-center">{{recipe.description}}</p>
+        </div>
+        <div class="d-flex justify-content-around">
+            <p>Under 30 min:</p>
+            <p>{%if recipe.under_30_minutes:%}
+                Yes
+                {%else%}
+                No
+                {%endif%}</p>
+        </div>
+        <div class="d-flex justify-content-between">
+            <p>Instructions:</p>
+            <p class="text-center">{{recipe.instructions}}</p>
+        </div>
+        <div class="d-flex justify-content-around">
+            <p>Date Made:</p>
+            <p>{{recipe.date_cooked}}</p>
+        </div>
+        <div class="d-flex justify-content-around">
+            <p>Posed by:</p>
+            <p>{{recipe.user.first_name}}</p>
+        </div>
+    
+    </div>
+</div>
+{%endblock%}
