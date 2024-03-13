@@ -13,7 +13,9 @@ def new_recipe():
 
 @app.route('/create/new', methods= ['POST'])
 def create_recipe():
-    under_30_minutes = request.form['under_30_minutes'] =="Yes"
+    if not Recipe.validate_recipe(request.form):
+        return redirect('/recipe/new')
+    under_30_minutes = request.form['under_30_minutes'] =="1"
     data = {
         "name" : request.form['name'],
         "description" : request.form['description'],
@@ -47,10 +49,12 @@ def edit_recipe(id):
     }
     return render_template("edit_recipe.html",recipe= Recipe.show_one_recipe(data), user= User.show_user(user_data))
 
-@app.route('/update/recipe', methods= ['POST'])
-def update_recipe():
-    under_30_minutes = request.form['under_30_minutes'] =="Yes"
-    recipe_id = request.form['recipe_id']
+@app.route('/update/recipe/<int:id>', methods= ['POST'])
+def update_recipe(id):
+    if not Recipe.validate_recipe(request.form):
+        return redirect(f"/recipe/edit/{id}")
+    under_30_minutes = request.form['under_30_minutes'] =="1"
+    recipe_id = id
     
     data = {
         "id": recipe_id,

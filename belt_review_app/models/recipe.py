@@ -1,6 +1,6 @@
 from belt_review_app.config.mysqlconnection import connectToMySQL
 from .user import User
-
+from flask import flash
 class Recipe:
     def __init__(self,data):
         self.id = data['id']
@@ -85,3 +85,29 @@ class Recipe:
         """
         return connectToMySQL('recipe_db').query_db(query,data)
         
+    
+    @staticmethod
+    def validate_recipe(data):
+        is_valid = True
+        if len(data['name']) < 3:
+            flash("name of the recipe must be at least 3 characters.")
+            is_valid = False
+        
+        if len(data["description"]) == 0:
+            flash('Descriptions is required','recipe')
+            is_valid= False
+        elif len(data['description']) < 3:
+            flash('description must be at least 3 characters','recipe')
+            is_valid= False
+        
+        if len(data["instructions"]) == 0:
+            flash('Instructions is required','recipe')
+            is_valid= False
+        elif len(data['instructions']) < 3:
+            flash('Instructions must be at least 3 characters','recipe')
+            is_valid= False
+        if not "under_30_minutes" in data:
+            flash('Recipe length required','recipe')
+            is_valid= False
+        
+        return is_valid

@@ -8,35 +8,42 @@
             <a href="/logout" class="btn btn-outline-danger">Log out</a>
         </div>
     </div>
-    <form action="/update/recipe" method="post">
-        <input type="hidden" name="recipe_id" value="{{ recipe.id }}">
+    <form action="/update/recipe/{{recipe.id}}" method="post">
+        {% with messages = get_flashed_messages(category_filter=['recipe']) %}
+        {% if messages %}
+            {%for message in messages %}
+                <p class="text-danger">{{ message }}</p>
+            {%endfor%}
+        {%endif%}
+    {%endwith%}
+    
     <div class="d-flex justify-content-between m-3 p-3">
         <div class="row">
             <input type="hidden" name="user_id" value="{{user.id}}">
             <div class="form-group m-3">
                 <label for="name" class="mb-2">Name</label>
-                <input type="text" class="form-control" name="name" id="name">
+                <input type="text" class="form-control" name="name" id="name" value="{{recipe.name}}">
             </div>
             <div class="form-group m-3">
                 <label for="description" class="mb-2">Description:</label>
-                <textarea name="description" id="description"class="form-control" cols="20" rows="5"></textarea>
+                <textarea name="description" id="description"class="form-control" cols="20" rows="5">{{recipe.description}}</textarea>
             </div>
             <div class="form-group m-3">
                 <label for="instructions" class="mb-2">Instructions:</label>
-                <textarea name="instructions" id="instructions" class="form-control" cols="20" rows="5"></textarea>
+                <textarea name="instructions" id="instructions" class="form-control" cols="20" rows="5">{{recipe.instructions}}</textarea>
             </div>
         </div>
         <div class="row m-3 p-2">
             <div class="form-group mt-5 pt-4">
                 <label for="date_cooked" class="mb-2">Date Cooked</label>
-                <input class="form-control" id="date_cooked" name="date_cooked" type="date" required>
+                <input class="form-control" id="date_cooked" name="date_cooked" type="date" required value="{{recipe.date_cooked}}">
             </div>
             <div class="form-group mb-4 pb-5">
                 <p>Under 30 minutes?</p>
                 <label for="yes" class="form-label">Yes</label>
-                <input type="radio" name="under_30_minutes" value="Yes"> 
+                <input type="radio" name="under_30_minutes" value="1"> 
                 <label for="no" class="form-label">No</label>
-                <input type="radio" name="under_30_minutes" value="No" > 
+                <input type="radio" name="under_30_minutes" value="0" > 
             </div>
             <div class="form-group">
                 <button type="submit" class=" btn btn-outline-primary mb-4">Submit</button>

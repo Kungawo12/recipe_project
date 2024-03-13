@@ -61,6 +61,7 @@ def login():
         flash('Invalid Password', "login")
         return redirect('/')
     session['user_id'] = user.id
+    
     return redirect('/recipe')
 
 

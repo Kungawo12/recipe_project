@@ -76,9 +76,9 @@ class User:
     def validate_login(data):
         is_valid = True
         if not EMAIL_REGEX.match(data['log_email']):
-            flash("Invalid email address!", "log_email")
+            flash("Invalid email address!", "login")
             is_valid = False
         if len(data['log_password'])< 8:
-            flash("Password must be at least 8 character", "log_password")
+            flash("Password must be at least 8 character", "login")
             is_valid = False
         return is_valid
