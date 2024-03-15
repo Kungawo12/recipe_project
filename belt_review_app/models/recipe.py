@@ -90,7 +90,7 @@ class Recipe:
     def validate_recipe(data):
         is_valid = True
         if len(data['name']) < 3:
-            flash("name of the recipe must be at least 3 characters.")
+            flash("name of the recipe must be at least 3 characters.",'recipe')
             is_valid = False
         
         if len(data["description"]) == 0:

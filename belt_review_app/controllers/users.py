@@ -42,7 +42,6 @@ def register():
     }
     id = User.save(data)
     session['user_id'] = id
-    print(user)
     return redirect('/recipe')
 
 @app.route('/user/login', methods = ['POST'])
